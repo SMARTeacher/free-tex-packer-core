@@ -1,4 +1,4 @@
-let Jimp = require("jimp");
+let Jimp = require("jimp/index");
 
 class TextureRenderer {
     

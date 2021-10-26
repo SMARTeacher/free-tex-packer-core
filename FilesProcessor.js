@@ -1,4 +1,4 @@
-let Jimp = require("jimp");
+let Jimp = require("jimp/index");
 let PackProcessor = require("./PackProcessor");
 let TextureRenderer = require("./utils/TextureRenderer");
 let tinify = require("tinify");
