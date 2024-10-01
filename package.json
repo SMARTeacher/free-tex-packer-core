@@ -1,9 +1,9 @@
 {
-  "name": "free-tex-packer-core",
+  "name": "@prodigy/free-tex-packer-core",
   "displayName": "Free texture packer",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Free texture packer core",
-  "url": "http://github.com/odrick/free-tex-packer-core",
+  "url": "https://github.com/SMARTeacher/free-tex-packer-core",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {},
@@ -21,11 +21,7 @@
     "sprite",
     "2d"
   ],
-  "author": "Alexander Norinchak",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/odrick/free-tex-packer-core"
-  },
+  "author": "Alexander Norinchak and Prodigy",
   "license": "MIT",
   "dependencies": {
     "@jvitela/mustache-wax": "^1.0.1",

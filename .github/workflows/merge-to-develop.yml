@@ -1,0 +1,24 @@
+name: Merge to develop
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on:
+      - self-hosted
+      - k8s-staging
+      - default
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+         fetch-depth: 0
+      
+      - name: Publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run:  npm publish

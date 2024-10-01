@@ -1,0 +1,41 @@
+name: Pull Requests
+
+on: 
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on:
+      - self-hosted
+      - k8s-staging
+      - default
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+         fetch-depth: 0
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+
+      - name: Publish Alpha & Notify
+        if: ${{ success() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(cat ./package.json | jq '.version' | sed 's/"//g')
+          SHA=$(git rev-parse --short "$GITHUB_SHA")
+          ALPHA_VERSION="$VERSION-alpha-$SHA"
+          npm version \
+            --allow-same-version \
+            --no-git-tag-version \
+            "$ALPHA_VERSION"
+          npm publish
+          npx atk github:add-comment \
+            -r "SMARTeacher/prodigy-game-framework" \
+            -i "${{ github.event.pull_request.number }}" \
+            -m "Alpha version published: $ALPHA_VERSION"
